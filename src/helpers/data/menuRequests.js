@@ -5,9 +5,13 @@ const apiBaseUrl = apiKeys.DonutDenApi.apiBaseUrl;
 
 const getMenu = () => new Promise((resolve, reject) => {
   axios
-    .get(`${apiBaseUrl}/menuItems`)
+    .get(`${apiBaseUrl}menuItems`)
     .then((result) => {
       resolve(result.data);
     })
     .catch(error => reject(error));
 })
+
+export default {
+  getMenu,
+}
