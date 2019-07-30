@@ -1,6 +1,9 @@
 @import '../styles/variables';
 
+body {
+  background-color: $backgroundColor;
+}
+
 .App {
   text-align: center;
-  background-color: cadetblue;
 }
