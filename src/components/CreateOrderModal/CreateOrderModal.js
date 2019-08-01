@@ -7,7 +7,7 @@ class Order extends React.Component {
       <div>
         <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Add to Order</ModalHeader>
           <ModalBody>
             Body of order modal
           </ModalBody>

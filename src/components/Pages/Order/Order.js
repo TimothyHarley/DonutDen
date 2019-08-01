@@ -1,91 +1,113 @@
 import React from 'react';
+import orderRequests from '../../../helpers/data/orderRequests';
 import { 
   Button, 
   Form, 
   FormGroup, 
   Label, 
   Input, 
-  FormText 
+  Row,
+  Col,
 } from 'reactstrap';
 import './Order.scss'
 
+const defaultOrder = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  phoneNumber: '',
+  pickupDate: '',
+  pickupTime: '',
+  isApproved: false,
+  isDeleted: false,
+  approvedBy: 3722,
+}
+
 class Order extends React.Component {
   state = {
+    newOrder: defaultOrder,
   }
 
+  createOrderEvent = (order) => {
+    orderRequests.createOrder(order)
+  }
+
+  formSubmit = (e) => {
+    e.preventDefault();
+    const order = { ...this.state.newOrder };
+    if (order.Firstname && order.LastName && order.email && order.phoneNumber && order.pickupDate && order.pickupTime){
+          this.createOrderEvent(order);
+    } else {
+      alert('Please fill out the whole order form.')
+    }
+  }
+
+  formFieldStringState = (name, event) => {
+    event.preventDefault();
+    const tempOrder = { ...this.state.newOrder };
+    tempOrder[name] = event.target.value;
+    this.setState({
+      newOrder: tempOrder,
+    });
+  }
+
+  firstNameChange = event => this.formFieldStringState('firstName', event);
+  lastNameChange = event => this.formFieldStringState('lastName', event);
+  emailChange = event => this.formFieldStringState('email', event);
+  phoneNumberChange = event => this.formFieldStringState('phoneNumber', event);
+  pickupDateChange = event => this.formFieldStringState('pickupDate', event);
+  pickupTimeChange = event => this.formFieldStringState('pickupTime', event);
+
   render(){
+    const { newOrder } = this.state;
 
     return(
       <div>
         <Form>
-          <FormGroup>
-            <Label for="exampleEmail">Email</Label>
-            <Input type="email" name="email" id="exampleEmail" placeholder="with a placeholder" />
-          </FormGroup>
-          <FormGroup>
-            <Label for="examplePassword">Password</Label>
-            <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleSelect">Select</Label>
-            <Input type="select" name="select" id="exampleSelect">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleSelectMulti">Select Multiple</Label>
-            <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleText">Text Area</Label>
-            <Input type="textarea" name="text" id="exampleText" />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleFile">File</Label>
-            <Input type="file" name="file" id="exampleFile" />
-            <FormText color="muted">
-              This is some placeholder block-level help text for the above input.
-              It's a bit lighter and easily wraps to a new line.
-            </FormText>
-          </FormGroup>
-          <FormGroup tag="fieldset">
-            <legend>Radio Buttons</legend>
-            <FormGroup check>
-              <Label check>
-                <Input type="radio" name="radio1" />{' '}
-                Option one is this and that—be sure to include why it's great
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Label check>
-                <Input type="radio" name="radio1" />{' '}
-                Option two can be something else and selecting it will deselect option one
-              </Label>
-            </FormGroup>
-            <FormGroup check disabled>
-              <Label check>
-                <Input type="radio" name="radio1" disabled />{' '}
-                Option three is disabled
-              </Label>
-            </FormGroup>
-          </FormGroup>
-          <FormGroup check>
-            <Label check>
-              <Input type="checkbox" />{' '}
-              Check me out
-            </Label>
-          </FormGroup>
-          <Button>Submit</Button>
+          <Row className="formRow">
+            <Col md={4}>
+              <FormGroup>
+                <Label for="FirstName">First Name</Label>
+                <Input type="text" name="firstName" id="firstName" onChange={this.firstNameChange} value={newOrder.firstName} />
+              </FormGroup>
+            </Col>
+            <Col md={4}>
+              <FormGroup>
+                <Label for="LastName">Last Name</Label>
+                <Input type="text" name="lastName" id="lastName" onChange={this.lastNameChange} value={newOrder.lastName} />
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row className="formRow">
+            <Col md={4}>
+              <FormGroup>
+                <Label for="Email">Email</Label>
+                <Input type="email" name="email" id="email" onChange={this.emailChange} value={newOrder.email} />
+              </FormGroup>
+            </Col>
+            <Col md={4}>
+              <FormGroup>
+                <Label for="PhoneNumber">Phone Number</Label>
+                <Input type="number" name="phoneNumber" id="phonNumber" onChange={this.phoneNumberChange} value={newOrder.phoneNumber} />
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row className="formRow">
+            <Col md={4}>
+              <FormGroup>
+                <Label for="PickupDate">Pickup Date</Label>
+                <Input type="date" name="pickupDate" id="pickupDate" onChange={this.pickupDateChange} value={newOrder.pickupDate} />
+              </FormGroup>
+            </Col>
+            <Col md={4}>
+              <FormGroup>
+                <Label for="PickupTime">Pickup Time</Label>
+                <Input type="time" name="pickupTime" id="pickupTime" onChange={this.pickupTimeChange} value={newOrder.pickupTime} />
+              </FormGroup>
+            </Col>
+          </Row>
+
+            <Button onClick={this.formSubmit}>Submit</Button>
         </Form>
       </div>
     );
