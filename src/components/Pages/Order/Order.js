@@ -1,5 +1,6 @@
 import React from 'react';
 import orderRequests from '../../../helpers/data/orderRequests';
+import AddToOrderModal from '../../AddToOrderModal/AddToOrderModal';
 import { 
   Button, 
   Form, 
@@ -26,6 +27,13 @@ const defaultOrder = {
 class Order extends React.Component {
   state = {
     newOrder: defaultOrder,
+    showModal: false,
+  }
+
+  toggle = () => {
+    this.setState({
+      showModal: !this.state.showModal,
+    })
   }
 
   createOrderEvent = (order) => {
@@ -106,9 +114,13 @@ class Order extends React.Component {
               </FormGroup>
             </Col>
           </Row>
-
+            <Button onClick={this.toggle}>Add To Order</Button>
             <Button onClick={this.formSubmit}>Submit</Button>
         </Form>
+        <AddToOrderModal 
+          toggle={this.toggle}
+          showModal={this.state.showModal}
+          />
       </div>
     );
   }
