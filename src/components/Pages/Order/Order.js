@@ -30,13 +30,13 @@ class Order extends React.Component {
   state = {
     newOrder: defaultOrder,
     showModal: false,
-    menuItem: {},
+    selectedItemArray: [],
     isCreatingOrder: true,
   }
 
   getMenuItem = (id) => {
     menuRequests.getMenuItem(id).then((gotMenuItem) => {
-      this.setState({ menuItem: gotMenuItem })
+      this.setState({ selectedItemArray: [...this.state.selectedItemArray, gotMenuItem.data] })
     });
   }
 
@@ -77,13 +77,22 @@ class Order extends React.Component {
   pickupTimeChange = event => this.formFieldStringState('pickupTime', event);
 
   render(){
-    const { newOrder, menuItem } = this.state;
+    const { newOrder, selectedItemArray } = this.state;
+
+    const singleSelectedItem = selectedItemArray => (
+      <SelectedMenuItems 
+        key={selectedItemArray.id}
+        MenuItem={selectedItemArray}
+        />
+    )
+
+    const allSelectedItems = selectedItemArray.map(singleSelectedItem);
 
     const hasSelectedItems = () => {
-      if (menuItem.id) {
+      if (selectedItemArray.length) {
         return(
           <div>
-            <SelectedMenuItems MenuItem={menuItem}/>
+            {allSelectedItems}
             <Button onClick={this.formSubmit}>Submit</Button>
           </div>
         )

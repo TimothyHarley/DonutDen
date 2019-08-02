@@ -7,19 +7,29 @@ import logo from '../../images/DonutDenLogo.jpeg';
 import './MenuItem.scss';
 
 class MenuItem extends React.Component {
+
+  onSelectMenuItem = (event) => {
+    event.preventDefault();
+    const { getMenuItem, MenuItem } = this.props;
+    getMenuItem(MenuItem.id);
+  }
+
   render(){
     const { MenuItem, isCreatingOrder } = this.props;
+
+
 
     const displaySwitcher = () => {
       if (isCreatingOrder) {
         return(
+          // ----- This only displays in /Order ----- //
           <Row className="containerRow">
           <Col className="imageCol">
-            <img src={logo} className="menuItemImage" alt={MenuItem.name} />
+            <img src={logo} className="menuItemImage" alt={MenuItem.name} onClick={this.onSelectMenuItem} />
           </Col>
           <Row className="dataRow">
             <Col className="itemName">
-              <h5>{MenuItem.name}!!!!!!!!!</h5>
+              <h5>{MenuItem.name}</h5>
             </Col>
             <Col className="itemPrice">
               ${MenuItem.price}
@@ -31,6 +41,7 @@ class MenuItem extends React.Component {
         </Row>
         )
       } return(
+        // ------ This only displays in /Menu ------ //
         <Row className="containerRow">
           <Col className="imageCol">
             <img src={logo} className="menuItemImage" alt={MenuItem.name} onClick={this.props.onSelect} />
