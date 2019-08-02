@@ -12,6 +12,9 @@ const getMenu = () => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 })
 
+const getMenuItem = (id) => axios.get(`${apiBaseUrl}menuItems/${id}`);
+
 export default {
   getMenu,
+  getMenuItem,
 }

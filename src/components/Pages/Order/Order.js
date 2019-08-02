@@ -11,6 +11,7 @@ import {
   Col,
 } from 'reactstrap';
 import './Order.scss'
+import SelectedMenuItems from '../../SelectedMenuItems/SelectedMenuItems';
 
 const defaultOrder = {
   firstName: '',
@@ -28,6 +29,7 @@ class Order extends React.Component {
   state = {
     newOrder: defaultOrder,
     showModal: false,
+    menuItem: {},
   }
 
   toggle = () => {
@@ -67,7 +69,18 @@ class Order extends React.Component {
   pickupTimeChange = event => this.formFieldStringState('pickupTime', event);
 
   render(){
-    const { newOrder } = this.state;
+    const { newOrder, menuItem } = this.state;
+
+    const hasSelectedItems = () => {
+      if (menuItem.id) {
+        return(
+          <div>
+            <SelectedMenuItems MenuItem={menuItem}/>
+            <Button onClick={this.formSubmit}>Submit</Button>
+          </div>
+        )
+      }
+    }
 
     return(
       <div>
@@ -115,7 +128,7 @@ class Order extends React.Component {
             </Col>
           </Row>
             <Button onClick={this.toggle}>Add To Order</Button>
-            <Button onClick={this.formSubmit}>Submit</Button>
+            {hasSelectedItems()}
         </Form>
         <AddToOrderModal 
           toggle={this.toggle}

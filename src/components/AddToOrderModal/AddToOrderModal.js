@@ -18,7 +18,7 @@ class AddToOrderModal extends React.Component {
   render(){
     return(
       <div>
-        <Modal isOpen={this.props.showModal} toggle={this.toggle} className={this.props.className}>
+        <Modal isOpen={this.props.showModal} toggle={this.toggle} className="MenuModal">
           <ModalHeader toggle={e => this.toggle(e)}>Add to Order</ModalHeader>
           <ModalBody>
             <Menu />
