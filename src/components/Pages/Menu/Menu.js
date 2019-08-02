@@ -20,6 +20,10 @@ class Menu extends React.Component {
     });
   }
 
+  onSelect = () => {
+    this.props.history.push('/order');
+  }
+
   render(){
     const {
       calledMenu,
@@ -29,6 +33,9 @@ class Menu extends React.Component {
       <MenuItem 
         key={calledMenu.id}
         MenuItem={calledMenu}
+        onSelect={this.onSelect}
+        getMenuItem={this.getMenuItem}
+        isCreatingOrder={this.props.isCreatingOrder}
       />
     );
 

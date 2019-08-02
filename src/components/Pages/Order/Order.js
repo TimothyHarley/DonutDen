@@ -12,6 +12,7 @@ import {
 } from 'reactstrap';
 import './Order.scss'
 import SelectedMenuItems from '../../SelectedMenuItems/SelectedMenuItems';
+import menuRequests from '../../../helpers/data/menuRequests';
 
 const defaultOrder = {
   firstName: '',
@@ -30,6 +31,13 @@ class Order extends React.Component {
     newOrder: defaultOrder,
     showModal: false,
     menuItem: {},
+    isCreatingOrder: true,
+  }
+
+  getMenuItem = (id) => {
+    menuRequests.getMenuItem(id).then((gotMenuItem) => {
+      this.setState({ menuItem: gotMenuItem })
+    });
   }
 
   toggle = () => {
@@ -133,6 +141,8 @@ class Order extends React.Component {
         <AddToOrderModal 
           toggle={this.toggle}
           showModal={this.state.showModal}
+          getMenuItem={this.getMenuItem}
+          isCreatingOrder={this.state.isCreatingOrder}
           />
       </div>
     );
