@@ -8,10 +8,13 @@ import './MenuItem.scss';
 
 class MenuItem extends React.Component {
 
+
+
   onSelectMenuItem = (event) => {
     event.preventDefault();
-    const { getMenuItem, MenuItem } = this.props;
-    getMenuItem(MenuItem.id);
+    const { getMenuItem, MenuItem, toggle } = this.props;
+    getMenuItem(MenuItem.id)
+    toggle()
   }
 
   render(){
@@ -25,7 +28,7 @@ class MenuItem extends React.Component {
           // ----- This only displays in /Order ----- //
           <Row className="containerRow">
           <Col className="imageCol">
-            <img src={logo} className="menuItemImage" alt={MenuItem.name} onClick={this.onSelectMenuItem} />
+            <img src={logo} className="menuItemImage" alt={MenuItem.name} onClick={this.onSelectMenuItem} style={{cursor: 'pointer'}} />
           </Col>
           <Row className="dataRow">
             <Col className="itemName">

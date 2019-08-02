@@ -38,6 +38,7 @@ class Menu extends React.Component {
         onSelect={this.onSelect}
         getMenuItem={this.props.getMenuItem}
         isCreatingOrder={this.props.isCreatingOrder}
+        toggle={this.props.toggle}
       />
     );
 
