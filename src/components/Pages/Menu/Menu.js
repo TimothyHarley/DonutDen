@@ -20,6 +20,12 @@ class Menu extends React.Component {
     });
   }
 
+  //this is a non-functioning attempt to load the orders page with a selected Item 
+  //to be added to the array in state for /order
+  onSelect = () => {
+    this.props.history.push('/order');
+  }
+
   render(){
     const {
       calledMenu,
@@ -29,6 +35,10 @@ class Menu extends React.Component {
       <MenuItem 
         key={calledMenu.id}
         MenuItem={calledMenu}
+        onSelect={this.onSelect}
+        getMenuItem={this.props.getMenuItem}
+        isCreatingOrder={this.props.isCreatingOrder}
+        toggle={this.props.toggle}
       />
     );
 
