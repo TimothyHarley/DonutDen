@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Col,
   Row,
-  Form,
   FormGroup,
   Label,
   Input,
@@ -17,8 +16,9 @@ class SelectedMenuItems extends React.Component {
 
   formFieldStringState = (event) => {
     event.preventDefault();
-    let tempQuantity = this.state.quantity;
-    tempQuantity = event.target.value;
+    const { MenuItem } = this.props;
+    const tempQuantity = event.target.value;
+    this.props.orderItemCallback(MenuItem.id, tempQuantity, (MenuItem.price*tempQuantity).toFixed(2));
     this.setState({
       quantity: tempQuantity,
     });
@@ -52,21 +52,19 @@ class SelectedMenuItems extends React.Component {
             {this.updatePrice()}
           </Col>
           <Col>
-            <Form>
-              <FormGroup>
-                <Label for="ItemQuantity">Quantity</Label>
-                <Input
-                  type="number"
-                  name="quantity"
-                  id="quantity"
-                  placeholder="1"
-                  onChange={this.quantityChange}
-                  value={this.state.quantity}
-                  max="1000"
-                  min="0"
-                />
-              </FormGroup>
-            </Form>
+            <FormGroup>
+              <Label for="ItemQuantity">Quantity</Label>
+              <Input
+                type="number"
+                name="quantity"
+                id="quantity"
+                placeholder="1"
+                onChange={this.quantityChange}
+                value={this.state.quantity}
+                max="1000"
+                min="0"
+              />
+            </FormGroup>
           </Col>
         </Row>
       </Row>

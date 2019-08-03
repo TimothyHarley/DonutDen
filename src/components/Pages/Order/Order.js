@@ -13,6 +13,7 @@ import {
 import './Order.scss'
 import SelectedMenuItems from '../../SelectedMenuItems/SelectedMenuItems';
 import menuRequests from '../../../helpers/data/menuRequests';
+import orderItemRequests from '../../../helpers/data/orderItemRequests'
 
 const defaultOrder = {
   firstName: '',
@@ -26,6 +27,7 @@ const defaultOrder = {
   approvedBy: 3722,
 }
 
+
 class Order extends React.Component {
   state = {
     newOrder: defaultOrder,
@@ -36,6 +38,8 @@ class Order extends React.Component {
 
   getMenuItem = (id) => {
     menuRequests.getMenuItem(id).then((gotMenuItem) => {
+      gotMenuItem.data.quantity = 1;
+      gotMenuItem.data.itemId = gotMenuItem.data.id;
       this.setState({ selectedItemArray: [...this.state.selectedItemArray, gotMenuItem.data] })
     });
   }
@@ -47,13 +51,18 @@ class Order extends React.Component {
   }
 
   createOrderEvent = (order) => {
-    orderRequests.createOrder(order)
+    orderRequests.createOrder(order).then((result) => {
+      const newOrderId = result.data.id;
+      this.state.selectedItemArray.forEach(item => item.orderId = newOrderId)
+      orderItemRequests.createOrderItem(this.state.selectedItemArray)
+      }
+    )
   }
 
   formSubmit = (e) => {
     e.preventDefault();
     const order = { ...this.state.newOrder };
-    if (order.Firstname && order.LastName && order.email && order.phoneNumber && order.pickupDate && order.pickupTime){
+    if (order.firstName && order.lastName && order.email && order.phoneNumber && order.pickupDate && order.pickupTime){
           this.createOrderEvent(order);
     } else {
       alert('Please fill out the whole order form.')
@@ -76,6 +85,18 @@ class Order extends React.Component {
   pickupDateChange = event => this.formFieldStringState('pickupDate', event);
   pickupTimeChange = event => this.formFieldStringState('pickupTime', event);
 
+  orderItemCallback = (itemId, quantity, unitPrice) => {
+    const newSelectedItems = [...this.state.selectedItemArray];
+    newSelectedItems.forEach(item => {
+      if (item.id === itemId) {
+        item.quantity = quantity;
+        item.price = unitPrice;
+      }
+    });
+
+    this.setState({selectedItemArray: newSelectedItems});
+  }
+
   render(){
     const { newOrder, selectedItemArray } = this.state;
 
@@ -83,6 +104,7 @@ class Order extends React.Component {
       <SelectedMenuItems 
         key={selectedItemArray.id}
         MenuItem={selectedItemArray}
+        orderItemCallback={this.orderItemCallback}
         />
     )
 
