@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 import './Menu.scss'
 import menuRequests from '../../../helpers/data/menuRequests';
 import MenuItem from '../../MenuItem/MenuItem';
@@ -6,6 +7,8 @@ import MenuItem from '../../MenuItem/MenuItem';
 class Menu extends React.Component {
   state = {
     calledMenu: [],
+    toOrderPage: false,
+    menuItemToPass: '-1',
   };
 
   componentDidMount() {
@@ -20,16 +23,22 @@ class Menu extends React.Component {
     });
   }
 
-  //this is a non-functioning attempt to load the orders page with a selected Item 
-  //to be added to the array in state for /order
-  onSelect = () => {
-    this.props.history.push('/order');
+  onSelect = (menuItem) => {
+    this.setState({ menuItemToPass: menuItem })
+    this.setState({ toOrderPage: true })
   }
 
   render(){
     const {
-      calledMenu,
+      calledMenu, toOrderPage
     } = this.state;
+
+    //May try to pass menuItem.Id through this if I have time later
+    if(toOrderPage === true){
+      return <Redirect to={{
+        pathname: '/order', state: { passedItemFromMenuPage: this.state.menuItemToPass } 
+      }} />
+    }
 
     const singleMenuItem = calledMenu => (
       <MenuItem 

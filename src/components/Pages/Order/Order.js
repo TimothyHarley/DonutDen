@@ -1,6 +1,7 @@
 import React from 'react';
 import orderRequests from '../../../helpers/data/orderRequests';
 import AddToOrderModal from '../../AddToOrderModal/AddToOrderModal';
+import { Redirect } from 'react-router-dom';
 import { 
   Button, 
   Form, 
@@ -34,6 +35,13 @@ class Order extends React.Component {
     showModal: false,
     selectedItemArray: [],
     isCreatingOrder: true,
+    orderHasBeenSubmitted: false,
+  }
+
+  componentDidMount() {
+    if(this.props.location.state) {
+      this.getMenuItem(this.props.location.state.passedItemFromMenuPage)
+    }
   }
 
   getMenuItem = (id) => {
@@ -54,7 +62,9 @@ class Order extends React.Component {
     orderRequests.createOrder(order).then((result) => {
       const newOrderId = result.data.id;
       this.state.selectedItemArray.forEach(item => item.orderId = newOrderId)
-      orderItemRequests.createOrderItem(this.state.selectedItemArray)
+      orderItemRequests.createOrderItem(this.state.selectedItemArray).then(()=> {
+        this.setState({ orderHasBeenSubmitted: true })
+      })
       }
     )
   }
@@ -63,7 +73,7 @@ class Order extends React.Component {
     e.preventDefault();
     const order = { ...this.state.newOrder };
     if (order.firstName && order.lastName && order.email && order.phoneNumber && order.pickupDate && order.pickupTime){
-          this.createOrderEvent(order);
+          this.createOrderEvent(order)
     } else {
       alert('Please fill out the whole order form.')
     }
@@ -99,6 +109,12 @@ class Order extends React.Component {
 
   render(){
     const { newOrder, selectedItemArray } = this.state;
+
+    if(this.state.orderHasBeenSubmitted === true) {
+      return <Redirect to={{
+        pathname: '/home', state: { thankYou: true } 
+      }} />
+    }
 
     const singleSelectedItem = selectedItemArray => (
       <SelectedMenuItems 

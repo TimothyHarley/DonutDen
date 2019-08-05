@@ -12,13 +12,19 @@ import './SelectedMenuItems.scss';
 class SelectedMenuItems extends React.Component {
   state = {
     quantity: '1',
+    menuItemPrice: '0',
+  }
+
+  componentDidMount() {
+    this.setState({ menuItemPrice: this.props.MenuItem.price })
   }
 
   formFieldStringState = (event) => {
     event.preventDefault();
     const { MenuItem } = this.props;
+    const { menuItemPrice } = this.state;
     const tempQuantity = event.target.value;
-    this.props.orderItemCallback(MenuItem.id, tempQuantity, (MenuItem.price*tempQuantity).toFixed(2));
+    this.props.orderItemCallback(MenuItem.id, tempQuantity, (menuItemPrice*tempQuantity).toFixed(2));
     this.setState({
       quantity: tempQuantity,
     });
@@ -27,9 +33,8 @@ class SelectedMenuItems extends React.Component {
   quantityChange = event => this.formFieldStringState(event);
 
   updatePrice = () => {
-    const { quantity } = this.state;
-    const { MenuItem } = this.props;
-    let totalPrice = (MenuItem.price*quantity).toFixed(2)
+    const { quantity, menuItemPrice } = this.state;
+    let totalPrice = (menuItemPrice*quantity).toFixed(2)
     return (
       <div>
         ${totalPrice}
