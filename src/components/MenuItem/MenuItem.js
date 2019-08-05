@@ -8,7 +8,10 @@ import './MenuItem.scss';
 
 class MenuItem extends React.Component {
 
-
+  callBackOnSelect = (event) => {
+    event.preventDefault();
+    this.props.onSelect(this.props.MenuItem.id)
+  }
 
   onSelectMenuItem = (event) => {
     event.preventDefault();
@@ -47,7 +50,7 @@ class MenuItem extends React.Component {
         // ------ This only displays in /Menu ------ //
         <Row className="containerRow">
           <Col className="imageCol">
-            <img src={logo} className="menuItemImage" alt={MenuItem.name} onClick={this.props.onSelect} />
+            <img src={logo} className="menuItemImage" alt={MenuItem.name} onClick={this.callBackOnSelect} style={{cursor: 'pointer'}} />
           </Col>
           <Row className="dataRow">
             <Col className="itemName">

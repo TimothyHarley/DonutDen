@@ -34,7 +34,6 @@ class SelectedMenuItems extends React.Component {
 
   updatePrice = () => {
     const { quantity, menuItemPrice } = this.state;
-    //const { MenuItem } = this.props;
     let totalPrice = (menuItemPrice*quantity).toFixed(2)
     return (
       <div>
