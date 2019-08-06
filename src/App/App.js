@@ -1,4 +1,6 @@
 import React from 'react';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import { 
   BrowserRouter,
   Route,
@@ -11,6 +13,8 @@ import Menu from '../components/Pages/Menu/Menu';
 import Order from '../components/Pages/Order/Order';
 import Auth from '../components/Pages/Auth/Auth';
 import Employees from '../components/Pages/Employees/Employees';
+import connection from '../helpers/data/connection';
+import authRequests from '../helpers/data/authRequests';
 import './App.scss';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
@@ -47,12 +51,23 @@ class App extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    this.removeListener();
+  }
+
+
   render() {
+
+    const logoutClickEvent = () => {
+      authRequests.logoutUser();
+      this.setState({ authed: false });
+    };
+
     return (
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
-            <AppNavbar />
+            <AppNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent} />
             <div className="App-container">
               <div className="justify-content-center">
                 <Switch>
