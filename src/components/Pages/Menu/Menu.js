@@ -55,7 +55,6 @@ class Menu extends React.Component {
 
     return(
       <div>
-        <h1>Menu</h1>
         <div className="menu-container">
           {menu}
         </div>

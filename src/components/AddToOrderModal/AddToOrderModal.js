@@ -24,7 +24,6 @@ class AddToOrderModal extends React.Component {
             <Menu getMenuItem={this.props.getMenuItem} isCreatingOrder={this.props.isCreatingOrder} toggle={this.props.toggle} />
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={e => this.toggle(e)}>Do Something</Button>{' '}
             <Button color="secondary" onClick={e => this.toggle(e)}>Cancel</Button>
           </ModalFooter>
         </Modal>
