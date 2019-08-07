@@ -4,8 +4,7 @@ import apiKeys from '../apiKeys';
 const apiBaseUrl = apiKeys.DonutDenApi.apiBaseUrl;
 
 const getMenu = () => new Promise((resolve, reject) => {
-  axios
-    .get(`${apiBaseUrl}menuItems`)
+  axios.get(`${apiBaseUrl}menuItems`)
     .then((result) => {
       resolve(result.data);
     })
