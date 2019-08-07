@@ -12,11 +12,11 @@ class Employees extends React.Component {
   }
 
   componentDidMount(){
-    orderRequests.getOrdersByDate(moment(new Date()).add(1,'days').format('MM DD YYYY')).then((requestedOrders) =>{
-      this.setState({ gotOrders: requestedOrders })
+    let tomorrow = moment(new Date()).add(1,'days').format('MMM DD, YYYY');
+    orderRequests.getOrdersByDate(tomorrow).then((requestedOrders) =>{
+      this.setState({ gotOrders: requestedOrders, date: tomorrow })
     });
   }
-
 
   dateChange = (event) => {
     event.preventDefault();
@@ -24,6 +24,14 @@ class Employees extends React.Component {
     tempDate = event.target.value;
     this.setState({
       date: tempDate,
+    });
+  }
+
+  onNewDateSubmit = (event) => {
+    event.preventDefault();
+    const { date } = this.state;
+    orderRequests.getOrdersByDate(date).then((requestedOrders) => {
+      this.setState({ gotOrders: requestedOrders })
     });
   }
 
@@ -41,7 +49,7 @@ class Employees extends React.Component {
 
     return(
       <div>
-        <h1>Orders To Fill</h1>
+        <h1>Orders for {this.state.date}</h1>
         <Form>
           <Row>
             <Col md={2}>
@@ -55,8 +63,8 @@ class Employees extends React.Component {
                   onChange={this.dateChange}
                   value={this.state.date}
                 />
+                <Button onClick={this.onNewDateSubmit}>Search</Button>
               </FormGroup>
-              <Button>Search</Button>
             </Col>
           </Row>
         </Form>
