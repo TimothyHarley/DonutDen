@@ -1,7 +1,8 @@
 import React from 'react';
 import moment from 'moment';
-import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Row, Col, Table } from 'reactstrap';
 import orderRequests from '../../../helpers/data/orderRequests';
+import TableOfOrders from '../../TableOfOrders/TableOfOrders';
 import './Employees.scss'
 
 class Employees extends React.Component {
@@ -27,9 +28,20 @@ class Employees extends React.Component {
   }
 
   render(){
+    const { gotOrders } = this.state;
+
+    const singleRowOfOrdersToFill = gotOrders => (
+      <TableOfOrders 
+        key={gotOrders.id}
+        orderRow={gotOrders}
+      />
+    )
+
+    const filledTable = gotOrders.map(singleRowOfOrdersToFill);
+
     return(
       <div>
-        <h1>Employees</h1>
+        <h1>Orders To Fill</h1>
         <Form>
           <Row>
             <Col md={2}>
@@ -48,6 +60,20 @@ class Employees extends React.Component {
             </Col>
           </Row>
         </Form>
+        <Table>
+        <thead>
+          <tr>
+            <th>Quantity</th>
+            <th>Product</th>
+            <th>Pickup Time</th>
+            <th>Name</th>
+            <th>Phone Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filledTable}
+        </tbody>
+      </Table>
       </div>
     );
   }
