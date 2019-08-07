@@ -164,7 +164,7 @@ class Order extends React.Component {
             <Col md={4}>
               <FormGroup>
                 <Label for="PhoneNumber">Phone Number</Label>
-                <Input type="number" name="phoneNumber" id="phonNumber" onChange={this.phoneNumberChange} value={newOrder.phoneNumber} />
+                <Input type="text" name="phoneNumber" id="phonNumber" onChange={this.phoneNumberChange} value={newOrder.phoneNumber} />
               </FormGroup>
             </Col>
           </Row>
