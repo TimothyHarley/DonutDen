@@ -9,10 +9,12 @@ class Employees extends React.Component {
   state = {
     date: '',
     gotOrders: [],
+    displayDate: '',
   }
 
   componentDidMount(){
-    let tomorrow = moment(new Date()).add(1,'days').format('MMM DD, YYYY');
+    let tomorrow = moment(new Date()).add(1,'days').format('YYYY-MM-DD');
+    this.displayDate(tomorrow);
     orderRequests.getOrdersByDate(tomorrow).then((requestedOrders) =>{
       this.setState({ gotOrders: requestedOrders, date: tomorrow })
     });
@@ -30,9 +32,15 @@ class Employees extends React.Component {
   onNewDateSubmit = (event) => {
     event.preventDefault();
     const { date } = this.state;
+    this.displayDate(date);
     orderRequests.getOrdersByDate(date).then((requestedOrders) => {
       this.setState({ gotOrders: requestedOrders })
     });
+  }
+
+  displayDate = (date) => {
+    const format = moment(date).format('MMM DD, YYYY');
+    this.setState({ displayDate: format })
   }
 
   render(){
@@ -49,7 +57,7 @@ class Employees extends React.Component {
 
     return(
       <div>
-        <h1>Orders for {this.state.date}</h1>
+        <h1>Orders for {this.state.displayDate}</h1>
         <Form>
           <Row>
             <Col md={2}>
