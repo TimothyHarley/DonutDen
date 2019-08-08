@@ -36,6 +36,7 @@ class Order extends React.Component {
     selectedItemArray: [],
     isCreatingOrder: true,
     orderHasBeenSubmitted: false,
+    orderCountByDate: '0',
   }
 
   componentDidMount() {
@@ -69,14 +70,24 @@ class Order extends React.Component {
     )
   }
 
+  getOrdersForDate() {
+    const getDate = this.state.newOrder.pickupDate;
+    orderRequests.getOrderCountByDate(getDate).then((results) => {
+          this.setState({ orderCountByDate: results.data.orderSum })
+    })
+  }
+
   formSubmit = (e) => {
-    e.preventDefault();
-    const order = { ...this.state.newOrder };
-    if (order.firstName && order.lastName && order.email && order.phoneNumber && order.pickupDate && order.pickupTime){
-          this.createOrderEvent(order)
-    } else {
-      alert('Please fill out the whole order form.')
-    }
+
+    this.getOrdersForDate();
+
+    // e.preventDefault();
+    // const order = { ...this.state.newOrder };
+    // if (order.firstName && order.lastName && order.email && order.phoneNumber && order.pickupDate && order.pickupTime){
+    //       this.createOrderEvent(order)
+    // } else {
+    //   alert('Please fill out the whole order form.')
+    // }
   }
 
   formFieldStringState = (name, event) => {
