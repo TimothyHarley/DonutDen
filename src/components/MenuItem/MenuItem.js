@@ -3,7 +3,6 @@ import {
   Col,
   Row,
 } from 'reactstrap';
-import logo from '../../images/DonutDenLogo.jpeg';
 import './MenuItem.scss';
 
 class MenuItem extends React.Component {
@@ -31,7 +30,7 @@ class MenuItem extends React.Component {
           // ----- This only displays in /Order ----- //
           <Row className="containerRow">
           <Col className="imageCol">
-            <img src={logo} className="menuItemImage" alt={MenuItem.name} onClick={this.onSelectMenuItem} style={{cursor: 'pointer'}} />
+            <img src={MenuItem.image} className="menuItemImage" alt={MenuItem.name} onClick={this.onSelectMenuItem} style={{cursor: 'pointer'}} />
           </Col>
           <Row className="dataRow">
             <Col className="itemName">
@@ -41,7 +40,7 @@ class MenuItem extends React.Component {
               ${MenuItem.price}
             </Col>
             <Row className="itemDescription">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet massa a est porttitor facilisis eget in leo. Phasellus quis nisl dolor. Vestibulum cursus sem rutrum turpis mollis, a placerat ante commodo.</p>
+              <p>{MenuItem.description}</p>
             </Row>
           </Row>
         </Row>
@@ -50,7 +49,7 @@ class MenuItem extends React.Component {
         // ------ This only displays in /Menu ------ //
         <Row className="containerRow">
           <Col className="imageCol">
-            <img src={logo} className="menuItemImage" alt={MenuItem.name} onClick={this.callBackOnSelect} style={{cursor: 'pointer'}} />
+            <img src={MenuItem.image} className="menuItemImage" alt={MenuItem.name} onClick={this.callBackOnSelect} style={{cursor: 'pointer'}} />
           </Col>
           <Row className="dataRow">
             <Col className="itemName">
@@ -60,7 +59,7 @@ class MenuItem extends React.Component {
               ${MenuItem.price}
             </Col>
             <Row className="itemDescription">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet massa a est porttitor facilisis eget in leo. Phasellus quis nisl dolor. Vestibulum cursus sem rutrum turpis mollis, a placerat ante commodo.</p>
+              <p>{MenuItem.description}</p>
             </Row>
           </Row>
         </Row>

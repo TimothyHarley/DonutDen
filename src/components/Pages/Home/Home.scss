@@ -32,6 +32,7 @@ $border-shadow: 0 0 0.1vw 0.4vw #fff7f7,
   height: 40vh;
   background-image: url('../../../images/BBBanner.jpg');
   background-size: cover;
+  margin-top: -8px;
 }
 
 .neon-text {
@@ -80,6 +81,10 @@ $border-shadow: 0 0 0.1vw 0.4vw #fff7f7,
 .about-us {
   margin-top: 30px;
   font-size: 1.2em
+}
+
+.logo {
+  border-radius: 50%;
 }
 
 .logo-box {
