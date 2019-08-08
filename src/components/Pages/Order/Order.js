@@ -78,16 +78,13 @@ class Order extends React.Component {
   }
 
   formSubmit = (e) => {
-
-    this.getOrdersForDate();
-
-    // e.preventDefault();
-    // const order = { ...this.state.newOrder };
-    // if (order.firstName && order.lastName && order.email && order.phoneNumber && order.pickupDate && order.pickupTime){
-    //       this.createOrderEvent(order)
-    // } else {
-    //   alert('Please fill out the whole order form.')
-    // }
+    e.preventDefault();
+    const order = { ...this.state.newOrder };
+    if (order.firstName && order.lastName && order.email && order.phoneNumber && order.pickupDate && order.pickupTime){
+          this.createOrderEvent(order)
+    } else {
+      alert('Please fill out the whole order form.')
+    }
   }
 
   formFieldStringState = (name, event) => {
