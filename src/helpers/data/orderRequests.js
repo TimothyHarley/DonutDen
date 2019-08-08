@@ -12,7 +12,11 @@ const getOrdersByDate = (date) => new Promise((resolve, reject) => {
     })
     .catch(error => reject(error));
 })
+
+const getOrderCountByDate = (date) => axios.get(`${apiBaseUrl}orders/order-sum/${date}`);
+
 export default {
   createOrder,
   getOrdersByDate,
+  getOrderCountByDate,
 }

@@ -36,6 +36,7 @@ class Order extends React.Component {
     selectedItemArray: [],
     isCreatingOrder: true,
     orderHasBeenSubmitted: false,
+    orderCountByDate: '0',
   }
 
   componentDidMount() {
@@ -67,6 +68,13 @@ class Order extends React.Component {
       })
       }
     )
+  }
+
+  getOrdersForDate() {
+    const getDate = this.state.newOrder.pickupDate;
+    orderRequests.getOrderCountByDate(getDate).then((results) => {
+          this.setState({ orderCountByDate: results.data.orderSum })
+    })
   }
 
   formSubmit = (e) => {
