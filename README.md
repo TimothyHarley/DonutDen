@@ -5,3 +5,11 @@
   Orders can be written by anyone without authentication. However, orders cannot be submitted until the whole order form has been filled out.  This feature alone will help solve most of the order mishaps that I've seen in the past.  Once logged in, an employee will be able to see all orders for any day selected.  Orders are orginized in a manner that I believed most helpful for the cooks.  The primary goals of this app were to ensure that orders are filled out completely and that they wont get lost.  I plan to continue working on this app and add suggestions based on the requests of employees and other managers.  Hopfully this will be the legacy that I leave behind for the future of Donut Den, in return for all that this little donut shop has done for me.
   
  ### Technologies Used
+ - React
+ - Github
+ - Bootstrap
+ - Firebase
+ - .Net
+ - SQL Server
+ 
+ ### Screenshots
