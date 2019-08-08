@@ -17,14 +17,17 @@ class Home extends React.Component {
     const thankYou = () => {
       if(this.state.thankYou){
       return 'Thank You for placing you order with us!'
-      } else {
-        return 'Welcome!'
       }
     }
 
     return(
       <div>
         <h1>{thankYou()}</h1>
+        <div className="wrapper">
+          <div className="neon-wrapper">
+            <div className="neon-text">FOX'S DONUT DEN</div>
+          </div>
+        </div>
       </div>
     );
   }
