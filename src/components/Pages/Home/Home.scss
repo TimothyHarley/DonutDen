@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css?family=Text+Me+One');
+
+.DonutDenBanner {
+  width: 100%;
+}
+
+$text-shadow: .1vw 0vw .25vw #ffd8d8, .2vw 0vw .25vw #ffd8d8, .4vw 0vw .25vw #ffd8d8, 
+  .1vw 0vw   0vw #f25757, .2vw 0vw   0vw #f25757, .4vw 0vw   0vw #f25757,
+  .1vw 0vw  .1vw #f25757, .2vw 0vw  .1vw #f25757, .4vw 0vw  .1vw #f25757,
+  .1vw 0vw   2vw #f25757, .2vw 0vw   2vw #f25757, .4vw 0vw   2vw #f25757, 
+  .1vw 0vw   1vw #e50b0b, .2vw 0vw   1vw #e50b0b, .4vw 0vw   5vw #e50b0b, 
+  .1vw 0vw   5vw #e50b0b, .2vw 0vw  20vw #e50b0b, .4vw 0vw  10vw #e50b0b,
+  .1vw 0vw  10vw #e50b0b, .2vw 0vw  30vw #e50b0b, .4vw 0vw  10vw #e50b0b;
+
+$border-shadow: 0 0 0.1vw 0.4vw #fff7f7,   
+  0 0 0.4vw 0.6vw #e97272, 
+  0 0 4vw 0.4vw #e50b0b,
+  inset 0 0 1.5vw 0.4vw #e50b0b,
+  inset 0 0 0.4vw 0.2vw #e97272,
+  inset 0 0 0.5vw 0.2vw #fff7f7;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40vh;
+  background-image: url('../../../images/BBBanner.jpg');
+  background-size: cover;
+  margin-top: -8px;
+}
+
+.neon-text {
+  font-family: 'Text Me One', sans-serif;
+  font-size: 9rem;
+  text-align: center;
+  color: #ffd8d8;
+  padding: 0 3.5rem 0 3.5rem;
+
+  // text-shadow: $text-shadow;
+  animation: text-glow 5s linear forwards;
+}
+
+.neon-wrapper {
+  border: solid 2px #ffd8d8;
+  border-radius: 1.5rem;
+  animation: border-glow 5s linear forwards;
+}
+
+@keyframes text-glow {
+  0% { text-shadow: none; }
+  15% { text-shadow: $text-shadow; }
+  17% { text-shadow: none; }
+  19% { text-shadow: $text-shadow; }
+  
+  50% { text-shadow: none; }
+  55% { text-shadow: $text-shadow; }
+  57% { text-shadow: none; }
+  65% { text-shadow: $text-shadow; }
+  
+  100% { text-shadow: $text-shadow; }
+}
+
+@keyframes border-glow {
+  0% { box-shadow: none; }
+  30% { box-shadow: none; }
+  35% { box-shadow: $border-shadow; }
+  37% { box-shadow: none; }
+  45% { box-shadow: $border-shadow; }
+  47% { box-shadow: none; }
+  49% { box-shadow: $border-shadow; }
+  
+  100% { box-shadow: $border-shadow; }
+}
+
+.about-us {
+  margin-top: 30px;
+  font-size: 1.2em
+}
+
+.logo {
+  border-radius: 50%;
+}
+
+.logo-box {
+  padding-left: 12%;
+}

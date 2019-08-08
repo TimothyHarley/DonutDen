@@ -6,7 +6,6 @@ import {
   Label,
   Input,
 } from 'reactstrap';
-import logo from '../../images/DonutDenLogo.jpeg';
 import './SelectedMenuItems.scss';
 
 class SelectedMenuItems extends React.Component {
@@ -47,7 +46,7 @@ class SelectedMenuItems extends React.Component {
     return(
       <Row className="containerRow">
         <Col className="imageCol">
-          <img src={logo} className="menuItemImage" alt={MenuItem.name} />
+          <img src={MenuItem.image} className="menuItemImage" alt={MenuItem.name} />
         </Col>
         <Row className="dataRow">
           <Col className="itemName">
