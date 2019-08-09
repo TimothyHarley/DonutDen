@@ -21,11 +21,11 @@
  
  ### Screenshots
  
-<img src="src/images/screenshot.png" alt="Menu page"/>
+<img src="src/images/screenshot.jpg" alt="Menu page"/>
 
-<img src="src/images/Screenshot2.png" alt="Emplyees page"/>
+<img src="src/images/Screenshot2.jpg" alt="Emplyees page"/>
 
-<img src="src/images/Screenshot3.png" alt="AboutUs page"/>
+<img src="src/images/Screenshot3.jpg" alt="AboutUs page"/>
 
 ### Run this project
 - Query DonutDen_Seed.sql in SQL Manager
